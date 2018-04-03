@@ -4,7 +4,7 @@ import grails.rest.RestfulController
 
 /**
  * Extended "User" restful api. This allows us to customize our backend resource logic and validation
- * as well as provide user friendly response messaging.
+ * as well as provide custom user friendly response messaging.
  */
 class UserController extends RestfulController {
     static responseFormats = ['json', 'xml']
@@ -66,7 +66,7 @@ class UserController extends RestfulController {
 
             // if user found, invoke update.
             // all validation and system exceptions will bubble up to and be handled by "handleException"
-            userService.update(params)
+            userService.update(user, params)
 
             response.status = 202
 

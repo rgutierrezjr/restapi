@@ -21,9 +21,7 @@ class UserService {
      * @throws Exception
      */
     def update(User user, params) throws Exception {
-        user.properties(params)
-
-        return validateExistingUser(user)
+        return validateAndUpdateExistingUser(user, params)
     }
 
     /* VALIDATION SERVICES */
@@ -31,7 +29,7 @@ class UserService {
     /**
      * This service will validate form data for a new instance of User. It will throw an exception if any validation
      * fails. Exceptions will be caught up at the Controller level by the appropriate exception handler.
-     * @param params
+     * @param params Request params
      * @return user New User instance
      * @throws Exception
      */
@@ -82,11 +80,14 @@ class UserService {
     /**
      * This service validate an existing User with new parameters. If any validation fails, the service will throw
      * an exception that is caught by the controller exception handler.
-     * @param user User instance to be updated.
+     * @param user User instance being updated.
      * @return user The updated User instance
      * @throws Exception
      */
-    def validateExistingUser(User user) throws Exception {
+    def validateAndUpdateExistingUser(User user, params) throws Exception {
+        user.properties(params)
+
+        // TODO: implement and replace generic Exception with UserValidationException
         if (user.isDirty("firstName")) {
             if (!user.firstName || user.firstName == "") {
                 throw new Exception("First name cannot be blank.")
@@ -106,12 +107,11 @@ class UserService {
         }
 
         if (user.isDirty("password")) {
-            // TODO: encrypt new password.
+            // new password is encrypted during domain level event "beforeUpdate"
             if (!user.password || user.password == "") {
                 throw new Exception("Password invalid. Please enter a valid password.")
             }
         }
-
 
         if (!user.save()) {
             throw new Exception("Failed to update user.")
