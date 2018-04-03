@@ -3,8 +3,8 @@ package restapi.users
 import grails.rest.RestfulController
 
 /**
- * Extended "User" restful api. This allows us to customize our backend resource logic and
- * provide user friendly validation and messaging.
+ * Extended "User" restful api. This allows us to customize our backend resource logic and validation
+ * as well as provide user friendly response messaging.
  */
 class UserController extends RestfulController {
     static responseFormats = ['json', 'xml']
@@ -19,7 +19,7 @@ class UserController extends RestfulController {
      * index simulates GET /user
      */
     def index() {
-        // TODO: we might want to think about paginated results here. send all for now.
+        // TODO: add pagination capabilities to this api action.
         respond User.list()
     }
 
@@ -30,8 +30,8 @@ class UserController extends RestfulController {
      */
     def show(User user) {
         if (!user) {
-            // TODO: add detailed messaging here? are status code sufficient?
-            respond status: 404
+            response.status = 404
+            respond message: "User not found."
         } else {
             respond user
         }
@@ -41,6 +41,9 @@ class UserController extends RestfulController {
      * "save" will simulate "posting" a new User record. POST /users
      */
     def save(User user) {
+
+        // "save" will run backend validation and then create a new instance of "user"
+        // all validation and system exceptions will bubble up to and be handled by "handleException"
         userService.save(params)
 
         // if execution has reached this point then validation has passed and a user has been created.
@@ -54,12 +57,15 @@ class UserController extends RestfulController {
      * "update" will simulate PUT /users/${id}* @param user User being updated
      */
     def update(User user) {
+
+        // if th user is not found, response with appropriate response code and message
         if (!user) {
             response.status = 404
             respond message: "User not found."
         } else {
 
-            // update user
+            // if user found, invoke update.
+            // all validation and system exceptions will bubble up to and be handled by "handleException"
             userService.update(params)
 
             response.status = 202
@@ -72,7 +78,7 @@ class UserController extends RestfulController {
 
     /**
      * Highest level of exception handling. All other exception handlers declared below this one.
-     * @param e
+     * @param e Exception
      * @return
      */
     def handleException(Exception e) {
