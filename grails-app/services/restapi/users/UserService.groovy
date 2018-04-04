@@ -132,4 +132,22 @@ class UserService {
 
         return user
     }
+
+    /**
+     * This service will delete a User, set any necessary statuses, and remove any associations.
+     * @param user
+     * @return true If successfully deletes the User instance.
+     * @throws Exception
+     */
+    def deleteUser(User user) throws Exception {
+        // all future associations will need to be deleted here as well.
+
+        try {
+            user.delete()
+        } catch (Exception e) {
+            throw new Exception("Failed to delete user.")
+        }
+
+        return true
+    }
 }

@@ -26,7 +26,7 @@ class UserController extends RestfulController {
     /**
      * By specifying the domain instance as a parameter to the action Grails will automatically attempt to
      * lookup the domain instance using the id parameter of the request.
-     * @param user being fetched
+     * @param user User being fetched
      */
     def show(User user) {
         if (!user) {
@@ -39,6 +39,7 @@ class UserController extends RestfulController {
 
     /**
      * "save" will simulate "posting" a new User record. POST /users
+     * @param user User being updated
      */
     def save(User user) {
 
@@ -54,7 +55,8 @@ class UserController extends RestfulController {
         respond message: "User created."
     }
     /**
-     * "update" will simulate PUT /users/${id}* @param user User being updated
+     * "update" will simulate PUT /users/${id}*
+     * @param user User being updated
      */
     def update(User user) {
 
@@ -71,6 +73,27 @@ class UserController extends RestfulController {
             response.status = 200
 
             respond message: "User updated."
+        }
+    }
+
+    /**
+     * "delete" will simulate DELETE /user/${id}* @param user User being marked for deletion
+     * @return
+     */
+    def delete(User user) {
+        // if th user is not found, response with appropriate response code and message
+        if (!user) {
+            response.status = 404
+            respond message: "User not found."
+        } else {
+
+            // if user found, invoke delete.
+            // any system exceptions will bubble up to and be handled by "handleException"
+            userService.deleteUser(user, params)
+
+            response.status = 202
+
+            respond message: "User deleted."
         }
     }
 
