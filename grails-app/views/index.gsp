@@ -51,25 +51,20 @@
 
     <div id="content" role="main">
         <section class="row colset-2-its">
-            <h1>Welcome to Grails</h1>
+            <h1>Ruben's Sample REST API Application</h1>
 
             <p>
-                Congratulations, you have successfully started your first Grails application! At the moment
-                this is the default page, feel free to modify it to either redirect to a controller or display
-                whatever content you may choose. Below is a list of controllers that are currently deployed in
-                this application, click on each to execute its default action:
+                <strong>Please use a REST Client tool like Postman to reach the API.</strong>
             </p>
-
-            <div id="controllers" role="navigation">
-                <h2>Available Controllers:</h2>
-                <ul>
-                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                        <li class="controller">
-                            <g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link>
-                        </li>
-                    </g:each>
-                </ul>
-            </div>
+            <p>
+                <strong>Directions: </strong> Send login POST request to http://104.131.123.81/api/login with the following JSON: <br/>
+                <strong>{"username": "email_0@email.com", "password":"P@ssW0rd1"}</strong>
+            </p>
+            <p>
+                Use session token to make subsequent calls to http://104.131.123.81/api/user with the following header:
+                <strong>Key</strong> X-Auth-Token, <strong>Value</strong> [token from login response]
+            </p>
+            <p><strong>GET</strong> request will return list of test users.</p>
         </section>
     </div>
 

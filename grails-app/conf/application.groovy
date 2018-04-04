@@ -17,6 +17,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern: '/error', access: ['permitAll']],
         [pattern: '/index', access: ['permitAll']],
         [pattern: '/index.gsp', access: ['permitAll']],
+        [pattern: '/assets/**', access: ['permitAll']],
         [pattern: '/shutdown', access: ['permitAll']],
         [pattern: '/**/js/**', access: ['permitAll']],
         [pattern: '/**/css/**', access: ['permitAll']],
