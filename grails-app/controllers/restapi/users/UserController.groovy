@@ -68,7 +68,7 @@ class UserController extends RestfulController {
             // all validation and system exceptions will bubble up to and be handled by "handleException"
             userService.update(user, params)
 
-            response.status = 202
+            response.status = 200
 
             respond message: "User updated."
         }
