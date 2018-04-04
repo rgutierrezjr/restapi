@@ -9,7 +9,16 @@ class UserService {
      * @throws Exception
      */
     def save(params) throws Exception {
-        return validateAndSaveNewUser(params)
+
+        // validate a new user. "validateNewUser" will return a validated instance of User.
+        // any validation exception will bubble up back to the controller exception handler.
+        def validatedUser = validateNewUser(params)
+
+        if (!validatedUser.save()) {
+            throw new Exception("Failed to create user.")
+        } else {
+            return validatedUser
+        }
     }
 
     /**
@@ -21,7 +30,17 @@ class UserService {
      * @throws Exception
      */
     def update(User user, params) throws Exception {
-        return validateAndUpdateExistingUser(user, params)
+
+        // validate an existing user. "validateExistingUser" will return a validated instance of User.
+        // any validation exception will bubble up back to the controller exception handler.
+        def validatedUser = validateExistingUser(user, params)
+
+        // save validated existing user.
+        if (!validatedUser.save()) {
+            throw new Exception("Failed to update user.")
+        } else {
+            return user
+        }
     }
 
     /* VALIDATION SERVICES */
@@ -33,7 +52,7 @@ class UserService {
      * @return user New User instance
      * @throws Exception
      */
-    def validateAndSaveNewUser(params) throws Exception {
+    def validateNewUser(params) throws Exception {
         def newUser = new User()
 
         newUser.username = params?.email
@@ -70,11 +89,7 @@ class UserService {
             }
         }
 
-        if (!newUser.save()) {
-            throw new Exception("Failed to create user.")
-        } else {
-            return newUser
-        }
+        return newUser
     }
 
     /**
@@ -84,8 +99,10 @@ class UserService {
      * @return user The updated User instance
      * @throws Exception
      */
-    def validateAndUpdateExistingUser(User user, params) throws Exception {
+    def validateExistingUser(User user, params) throws Exception {
         user.properties(params)
+
+        // validate each "dirty" (updated) instance field
 
         // TODO: implement and replace generic Exception with UserValidationException
         if (user.isDirty("firstName")) {
@@ -113,10 +130,6 @@ class UserService {
             }
         }
 
-        if (!user.save()) {
-            throw new Exception("Failed to update user.")
-        } else {
-            return user
-        }
+        return user
     }
 }
