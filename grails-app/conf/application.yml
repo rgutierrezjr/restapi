@@ -98,12 +98,14 @@ environments:
         dataSource:
             dbCreate: update
             username: "root"
-            password: "Ben@2628"
+            password: "Big@2628"
             url: jdbc:mysql://127.0.0.1:3306/restapi
     test:
         dataSource:
             dbCreate: update
-            url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            username: "root"
+            password: "Big@2628"
+            url: jdbc:mysql://127.0.0.1:3306/restapi
     production:
         dataSource:
             dbCreate: update
