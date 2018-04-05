@@ -72,6 +72,14 @@ class UserServiceSpec extends Specification {
         assert validatedUser instanceof User
     }
 
+    void "deleteUser - best case"() {
+        when: "delete existing user"
+        def existingUser = User.findWhere(username: "test@email.com")
+
+        then: "deleteUser returns true"
+        assert userService.deleteUser(existingUser)
+    }
+
     /** Fail tests **/
 
     void "validateNewUser - non unique email"() {

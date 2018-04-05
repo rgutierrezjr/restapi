@@ -36,7 +36,7 @@ class UserService {
         def validatedUser = validateExistingUser(user, params)
 
         // save validated existing user.
-        if (!validatedUser.save()) {
+        if (!validatedUser.save(flush: true)) {
             throw new Exception("Failed to update user.")
         } else {
             return user
@@ -100,7 +100,14 @@ class UserService {
      * @throws Exception
      */
     def validateExistingUser(User user, params) throws Exception {
-        user.setProperties(params)
+        // update fields
+        user.firstName = params?.firstName
+        user.lastName = params?.lastName
+        user.role = params?.role
+        user.password = params?.password
+
+        // password is encrypted on "beforeInsert" domain instance event.
+        user.password = params?.password
 
         // validate each "dirty" (updated) instance field
 
@@ -140,10 +147,23 @@ class UserService {
      * @throws Exception
      */
     def deleteUser(User user) throws Exception {
-        // all future associations will need to be deleted here as well.
+        // all future associations will need to be deleted here as well. or the necessary
+        // cascade deletes will need to be configured under domain constraints.
 
+        // delete user roles. (spring security)
+        def roles = UserRole.findAllWhere(user: user)
+
+        if (roles) {
+            try {
+                roles*.delete(flush: true)
+            } catch (Exception e) {
+                throw new Exception("Failed to delete user roles.")
+            }
+        }
+
+        // delete user
         try {
-            user.delete()
+            user.delete(flush: true)
         } catch (Exception e) {
             throw new Exception("Failed to delete user.")
         }

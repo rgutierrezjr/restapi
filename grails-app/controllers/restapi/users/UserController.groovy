@@ -7,7 +7,7 @@ import grails.rest.RestfulController
  * as well as provide custom user friendly response messaging.
  */
 class UserController extends RestfulController {
-    static responseFormats = ['json', 'xml']
+    static responseFormats = ['json']
 
     UserService userService
 
@@ -42,10 +42,9 @@ class UserController extends RestfulController {
      * @param user User being updated
      */
     def save(User user) {
-
         // "save" will run backend validation and then create a new instance of "user"
         // all validation and system exceptions will bubble up to and be handled by "handleException"
-        userService.save(params)
+        userService.save(request.JSON)
 
         // if execution has reached this point then validation has passed and a user has been created.
         // set status code and respond success message.
@@ -59,7 +58,6 @@ class UserController extends RestfulController {
      * @param user User being updated
      */
     def update(User user) {
-
         // if th user is not found, response with appropriate response code and message
         if (!user) {
             response.status = 404
@@ -68,7 +66,7 @@ class UserController extends RestfulController {
 
             // if user found, invoke update.
             // all validation and system exceptions will bubble up to and be handled by "handleException"
-            userService.update(user, params)
+            userService.update(user, request.JSON)
 
             response.status = 200
 
@@ -89,7 +87,7 @@ class UserController extends RestfulController {
 
             // if user found, invoke delete.
             // any system exceptions will bubble up to and be handled by "handleException"
-            userService.deleteUser(user, params)
+            userService.deleteUser(user)
 
             response.status = 202
 
@@ -108,7 +106,7 @@ class UserController extends RestfulController {
         response.status = 400
 
         respond(
-                message: "Failed to create or update user",
+                message: "Failed to create or update user.",
                 error: e.message
         )
     }
