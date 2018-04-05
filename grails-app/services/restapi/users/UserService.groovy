@@ -81,11 +81,11 @@ class UserService {
             }
 
             if (!newUser.validate(["username"])) {
-                throw new Exception(("Email is invalid."))
+                throw new Exception("Email is invalid or already in use.")
             }
 
             if (!newUser.password) {
-                throw new Exception("Password required")
+                throw new Exception("Password required.")
             }
         }
 
@@ -100,7 +100,7 @@ class UserService {
      * @throws Exception
      */
     def validateExistingUser(User user, params) throws Exception {
-        user.properties(params)
+        user.setProperties(params)
 
         // validate each "dirty" (updated) instance field
 
@@ -118,8 +118,8 @@ class UserService {
         }
 
         if (user.isDirty("role")) {
-            if (user.role == "") {
-                throw new Exception("Role cannot be blank.")
+            if (!User.ROLE_TYPES.contains(user.role)) {
+                throw new Exception("Invalid role.")
             }
         }
 
