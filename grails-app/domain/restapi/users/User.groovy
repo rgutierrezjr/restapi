@@ -7,7 +7,6 @@ import restapi.tasks.Task
 import grails.rest.Resource
 
 @GrailsCompileStatic
-@Secured(['ROLE_SUPER_USER'])
 @Resource(uri = '/api/user')
 class User implements Serializable {
 

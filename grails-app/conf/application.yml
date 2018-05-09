@@ -98,7 +98,7 @@ environments:
         dataSource:
             dbCreate: update
             username: "root"
-            password: "Ben@2628"
+            password: "Big@2628"
             url: jdbc:mysql://127.0.0.1:3306/restapi
     test:
         dataSource:

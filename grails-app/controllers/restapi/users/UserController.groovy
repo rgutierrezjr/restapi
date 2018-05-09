@@ -9,7 +9,8 @@ import grails.rest.RestfulController
 class UserController extends RestfulController {
     static responseFormats = ['json']
 
-    UserService userService
+    def springSecurityService
+    def userService
 
     UserController() {
         super(User)
@@ -19,6 +20,9 @@ class UserController extends RestfulController {
      * index simulates GET /user
      */
     def index() {
+
+        println springSecurityService.loadCurrentUser()
+
         // TODO: add pagination capabilities to this api action.
         respond User.list()
     }

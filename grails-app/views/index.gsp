@@ -49,33 +49,32 @@
         </div>
     </div>
 
-    <div id="content" role="main">
-        <section class="row colset-2-its">
-            <h1>Ruben's Sample REST API Application</h1>
+    %{--<div id="content" role="main">--}%
+        %{--<section class="row colset-2-its">--}%
+            %{--<h1>Ruben's Sample REST API Application</h1>--}%
 
-            <p>
-                <strong>Please use a REST Client tool like Postman to reach the API.</strong>
-            </p>
-            <p>
-                <strong>Directions: </strong> Send login POST request to http://104.131.123.81/api/login with the following JSON: <br/>
-                <strong>{"username": "email_0@email.com", "password":"P@ssW0rd1"}</strong>
-            </p>
-            <p>
-                Use session token to make subsequent calls to http://104.131.123.81/api/user with the following header:
-                <strong>Key</strong> X-Auth-Token, <strong>Value</strong> [token from login response]
-            </p>
+            %{--<p>--}%
+                %{--<strong>Please use a REST Client tool like Postman to reach the API.</strong>--}%
+            %{--</p>--}%
+            %{--<p>--}%
+                %{--<strong>Directions: </strong> Send login POST request to http://104.131.123.81/api/login with the following JSON: <br/>--}%
+                %{--<strong>{"username": "email_0@email.com", "password":"P@ssW0rd1"}</strong>--}%
+            %{--</p>--}%
+            %{--<p>--}%
+                %{--Use session token to make subsequent calls to http://104.131.123.81/api/user with the following header:--}%
+                %{--<strong>Key</strong> X-Auth-Token, <strong>Value</strong> [token from login response]--}%
+            %{--</p>--}%
 
-            <p><strong>GET /user</strong> request will return list of test users.</p>
+            %{--<p><strong>GET /user</strong> request will return list of test users.</p>--}%
 
-            <p><strong>POST /user</strong> request will create a new user.</p>
+            %{--<p><strong>POST /user</strong> request will create a new user.</p>--}%
 
-            <p><strong>DELETE /user/[id]</strong> request will delete user [id].</p>
+            %{--<p><strong>DELETE /user/[id]</strong> request will delete user [id].</p>--}%
 
-            <p><strong>PUT /user/[id]</strong> request will update user [id].</p>
+            %{--<p><strong>PUT /user/[id]</strong> request will update user [id].</p>--}%
 
-            <p><strong>Note:</strong> Send raw (text) data with request. (application/json) not required.</p>
-        </section>
-    </div>
-
+            %{--<p><strong>Note:</strong> Send raw (text) data with request. (application/json) not required.</p>--}%
+        %{--</section>--}%
+    %{--</div>--}%
 </body>
 </html>

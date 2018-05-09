@@ -36,6 +36,7 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 grails.plugin.springsecurity.rest.logout.endpointUrl = '/api/logout'
 grails.plugin.springsecurity.rest.token.validation.useBearerToken = false
 grails.plugin.springsecurity.rest.token.validation.headerName = 'X-Auth-Token'
+grails.plugin.springsecurity.rest.token.validation.enableAnonymousAccess = true
 grails.plugin.springsecurity.rest.token.storage.memcached.hosts = 'localhost:11211'
 grails.plugin.springsecurity.rest.token.storage.memcached.username = ''
 grails.plugin.springsecurity.rest.token.storage.memcached.password = ''

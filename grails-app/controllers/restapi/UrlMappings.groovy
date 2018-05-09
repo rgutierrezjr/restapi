@@ -13,6 +13,9 @@ class UrlMappings {
         "500"(view:'/error')
         "404"(view:'/notFound')
 
-        "/api/user"(resources: "user")
+        "/api/users"(resources: "user")
+        "/api/companies"(resources: "company") {
+            '/register'(controller: "company", action: "register", method: "POST")
+        }
     }
 }
