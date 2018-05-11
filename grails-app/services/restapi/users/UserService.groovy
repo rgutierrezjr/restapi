@@ -8,11 +8,11 @@ class UserService {
      * @return user Newly created User instance.
      * @throws Exception
      */
-    def save(params) throws Exception {
+    def save(User newUser) throws Exception {
 
         // validate a new user. "validateNewUser" will return a validated instance of User.
         // any validation exception will bubble up back to the controller exception handler.
-        def validatedUser = validateNewUser(params)
+        def validatedUser = validateNewUser(newUser)
 
         if (!validatedUser.save()) {
             throw new Exception("Failed to create user.")
@@ -52,17 +52,7 @@ class UserService {
      * @return user New User instance
      * @throws Exception
      */
-    def validateNewUser(params) throws Exception {
-        def newUser = new User()
-
-        newUser.username = params?.email
-        newUser.firstName = params?.firstName
-        newUser.lastName = params?.lastName
-        newUser.role = params?.role
-
-        // password is encrypted on "beforeInsert" domain instance event.
-        newUser.password = params?.password
-
+    def validateNewUser(User newUser) throws Exception {
         // validate the user as a whole. if underlying  validation issues detected, perform granular validation.
         // User.validate() will run validation against constraints defined in the domain class.
         // TODO: implement and replace generic Exception with UserValidationException

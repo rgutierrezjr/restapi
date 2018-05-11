@@ -14,8 +14,6 @@ class UrlMappings {
         "404"(view:'/notFound')
 
         "/api/users"(resources: "user")
-        "/api/companies"(resources: "company") {
-            '/register'(controller: "company", action: "register", method: "POST")
-        }
+        "/api/companies"(resources: "company")
     }
 }

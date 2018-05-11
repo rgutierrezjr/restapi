@@ -11,20 +11,14 @@ class Company {
 
     String name
     String officeNumber
-
     Address officeAddress
-    Address billingAddress
-
-    User admin
 
     static constraints = {
         officeAddress nullable: true
-        billingAddress nullable: true
         officeNumber nullable: true
         preferences nullable: true
     }
 
-    static hasMany = [companyUsers: User]
-
+    static belongsTo = [account: Account]
     static hasOne = [preferences: CompanyPreferences]
 }
