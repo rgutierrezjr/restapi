@@ -7,7 +7,7 @@ class Account {
     Date dateCreated
     Date lastUpdated
 
-    String status = STATUS_ACTIVE
+    String status = STATUS_PROVISIONING
 
     User admin
     Company company
