@@ -10,6 +10,11 @@ class OnboardingController {
     def register(Account account) {
         def newAccount = onboardingService.createNewAccount(account)
 
+        // send welcome email
+        onboardingService.sendWelcomeEmail()
+
+        response.status = HttpURLConnection.HTTP_CREATED
+
         respond newAccount.admin
     }
 

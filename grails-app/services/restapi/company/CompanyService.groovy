@@ -1,7 +1,6 @@
 package restapi.company
 
 import restapi.accounts.Company
-import restapi.users.User
 
 class CompanyService {
     def userService
@@ -11,7 +10,7 @@ class CompanyService {
 
         if (!validatedCompany.save()) {
             println validatedCompany.errors.each {
-                println it
+                println itN
             }
 
             throw new Exception("Failed to create user.")

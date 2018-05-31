@@ -22,10 +22,12 @@ apply plugin:"org.grails.grails-gsp"
 
 repositories {
     mavenLocal()
+    mavenCentral()
     maven { url "https://repo.grails.org/grails/core" }
 }
 
 dependencies {
+    compile 'com.sendgrid:sendgrid-java:4.2.1'
     compile 'org.grails.plugins:spring-security-core:3.2.0'
     compile "org.grails.plugins:spring-security-rest:2.0.0.M2"
     runtime 'mysql:mysql-connector-java:5.1.29'
