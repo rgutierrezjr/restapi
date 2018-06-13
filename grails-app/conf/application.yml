@@ -110,5 +110,5 @@ environments:
         dataSource:
             dbCreate: update
             username: "root"
-            password: "Big@2628"
+            password: "brentisahipster"
             url: jdbc:mysql://127.0.0.1:3306/restapi
