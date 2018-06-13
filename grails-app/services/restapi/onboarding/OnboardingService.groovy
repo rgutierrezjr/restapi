@@ -51,6 +51,7 @@ class OnboardingService {
         Mail mail = new Mail(from, subject, to, content)
 
         //TODO: swap key based on app env here.
+        //TODO: create and add a welcome template using grails views.
         SendGrid sg = new SendGrid(SEND_GRID_API_DEV_KEY)
         Request sgRequest = new Request()
 
